@@ -3,24 +3,29 @@ package main
 
 import (
     "fmt"
+	"math"
 )
 
+type Point struct {
+	x float64
+	y float64
+}
 
-func remove(slice []int, i int) []int {
-	if i < 0 || len(slice) <= i {
-		return slice
+func NewPoint(x float64, y float64) Point {
+	return Point{
+		x: x,
+		y: y,
 	}
 
-	copy(slice[i:], slice[i+1:])
-	slice[len(slice) - 1] = 0
-	return slice[:len(slice) - 1]
+}
 
+func (p Point) Distance(other Point) float64 {
+	return math.Sqrt(math.Pow(p.x - other.x, 2) + math.Pow(p.y - other.y, 2))
 }
 
 
 func main() {
-	slice := []int{1, 2, 3, 4, 5, 6}
-	fmt.Println(slice)
-	new_slice := remove(slice, 2)
-	fmt.Println(new_slice)
+	point1 := NewPoint(1.5, 2.0)
+    point2 := NewPoint(4.0, 6.0)
+    fmt.Printf("Расстояние между точками: %f\n", point2.Distance(point1))
 }
